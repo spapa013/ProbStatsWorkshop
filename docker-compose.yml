@@ -1,0 +1,25 @@
+version: '2'
+services:
+  bash:
+    build:
+      context: . 
+    environment:
+      - DISPLAY=$DISPLAY
+    env_file: .env
+    volumes:
+      - .:/djslack
+      - /tmp/:/tmp/
+    entrypoint: /bin/bash
+  
+  notebook:
+    build:
+      context: .
+    environment:
+      - DISPLAY=$DISPLAY
+    env_file: .env
+    ports:
+      - "2222:8888"
+    volumes:
+      - .:/djslack
+      - ./notebooks:/notebooks
+      - /tmp/:/tmp/
